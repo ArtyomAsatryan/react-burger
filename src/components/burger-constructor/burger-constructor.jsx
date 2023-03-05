@@ -1,87 +1,88 @@
+import React from 'react'
 import styles from './burger-constructor.module.css';
-import CurrencyIconBig from '../../images/subtract.png';
-import { ConstructorElement, DragIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useDrop } from 'react-dnd';
+import { nanoid } from 'nanoid';
+import { useDispatch, useSelector } from 'react-redux';
+import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
+import { setBun, addIngredient, deleteIngredient, moveIngredient } from '../../services/actions/ingredients-constructor';
+import { BurgerElement } from '../burger-elements/burger-elements';
 
-export default function BurgerConstructor({ onClick }) {
+export function BurgerConstructor() {
+
+  const elements = useSelector(state => state.constructorList.constructorList)
+  const buns = useSelector(state => state.constructorList.buns)
+  const dispatch = useDispatch();
+
+  const [, dropConstructor] = useDrop(() => ({
+    accept: 'item',
+    drop: (item => moveIngredient(item.ingredient))
+  }))
+
+  const [, dropIngredient] = useDrop(() => ({
+    accept: 'card',
+    drop: (item => addCardElement(item.ingredient))
+  }))
+
+  const addCardElement = (element) => {
+    element = { ...element, id: nanoid() }
+    if (element.type === 'bun') {
+      dispatch(setBun(element))
+    }
+    if (element.type !== 'bun') {
+      dispatch(addIngredient(element))
+    }
+  }
+
+  const deleteElement = (ingredient) => {
+    dispatch(deleteIngredient(ingredient))
+  }
+
   return (
-    <section className={styles.total}>
+    <section className={styles.total} ref={dropIngredient}>
       <ul className={styles.ingredientsList}>
-        <li className={styles.listElement}>
-          <ConstructorElement
-            type="top"
-            isLocked={true}
-            text="Краторная булка N-200i (верх)"
-            price={20}
-            thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
-          />
+        {buns.map((element) => {
+          if (element.type === 'bun')
+            return (
+              <li className={styles.listElement} key={element.id}>
+                <ConstructorElement
+                  type="top"
+                  isLocked={true}
+                  text={`${element.name} (верх)`}
+                  price={element.price}
+                  thumbnail={element.image}
+                />
+              </li>
+            );
+        })}
+        <li className={styles.smallScroll} ref={dropConstructor}>
+          {elements.map((element, index) => {
+            if (element.type !== 'bun')
+              return (
+                <BurgerElement
+                  element={element}
+                  index={index}
+                  id={element.id}
+                  key={element.id}
+                  deleteElement={deleteElement} />
+              );
+          }
+          )}
         </li>
-        <div className={styles.smallScroll}>
-          <li className={styles.listElement}>
-            <DragIcon type="primary" />
-            <ConstructorElement
-              text="Соус традиционный галактический"
-              price={30}
-              thumbnail={'https://code.s3.yandex.net/react/code/sauce-03.png'}
-            />
-          </li>
-          <li className={styles.listElement}>
-            <DragIcon type="primary" />
-            <ConstructorElement
-              text="Мясо бессмертных моллюсков Protostomia"
-              price={300}
-              thumbnail={'https://code.s3.yandex.net/react/code/meat-02.png'}
-            />
-          </li>
-          <li className={styles.listElement}>
-            <DragIcon type="primary" />
-            <ConstructorElement
-              text="Плоды Фалленианского дерева"
-              price={80}
-              thumbnail={'https://code.s3.yandex.net/react/code/sp_1.png'}
-            />
-          </li>
-          <li className={styles.listElement}>
-            <DragIcon type="primary" />
-            <ConstructorElement
-              text="Хрустящие минеральные кольца"
-              price={80}
-              thumbnail={'https://code.s3.yandex.net/react/code/mineral_rings.png'}
-            />
-          </li>
-          <li className={styles.listElement}>
-            <DragIcon type="primary" />
-            <ConstructorElement
-              text="Хрустящие минеральные кольца"
-              price={80}
-              thumbnail={'https://code.s3.yandex.net/react/code/mineral_rings.png'}
-            />
-          </li>
-          <li className={styles.listElement}>
-            <DragIcon type="primary" />
-            <ConstructorElement
-              text="Хрустящие минеральные кольца"
-              price={80}
-              thumbnail={'https://code.s3.yandex.net/react/code/mineral_rings.png'}
-            />
-          </li>
-        </div>
-        <li className={styles.listElement}>
-          <ConstructorElement
-            type="bottom"
-            isLocked={true}
-            text="Краторная булка N-200i (низ)"
-            price={20}
-            thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
-          />
-        </li>
+        {buns.map((element) => {
+          if (element.type === 'bun')
+            return (
+              <li className={styles.listElement} key={element.id}>
+                <ConstructorElement
+                  type="bottom"
+                  isLocked={true}
+                  text={`${element.name} (низ)`}
+                  price={element.price}
+                  thumbnail={element.image}
+                />
+              </li>
+            );
+        })}
       </ul>
-      <div className={styles.payment}>
-        <div className={styles.price}>
-          <p className="text text_type_digits-medium">610</p>
-          <img src={CurrencyIconBig} alt='Значок валюты' />
-        </div>
-        <Button type="primary" size="large" htmlType='button' onClick={onClick}>Оформить заказ</Button>
-      </div>
     </section>
   )
 }

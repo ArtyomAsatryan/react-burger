@@ -1,7 +1,10 @@
 import styles from './ingredient-details.module.css';
 import { ingredientType } from '../../utils/prop-types.jsx';
+import { useSelector } from 'react-redux';
 
-export default function IngredientDetails({ ingredient }) {
+export function IngredientDetails() {
+
+  const ingredient = useSelector(state => state.ingredientDetails.ingredientDetails)
 
   if (!ingredient) {
     return null

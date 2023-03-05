@@ -1,11 +1,15 @@
+import React from 'react';
 import styles from './ingredient-set.module.css';
 import PropTypes from 'prop-types';
-import { ingredientType } from '../../utils/prop-types.jsx';
-import IngredientCard from '../ingredient-card/ingredient-card.jsx';
+import {IngredientCard} from '../ingredient-card/ingredient-card.jsx';
+import { useSelector } from 'react-redux';
 
-export default function IngredientsSet({ ingredients, type, title, onClick }) {
+ export const IngredientsSet = React.forwardRef(({ type, title }, ref) => {
+
+  const ingredients = useSelector(state => state.ingredientsList.ingredientsList);
+
   return (
-    <section className='pb-10'>
+    <section className="pb-10" ref={ref}>
       <h3 className="text text_type_main-medium mb-6">{title}</h3>
       <ul className={styles.set}>
         {ingredients
@@ -14,14 +18,15 @@ export default function IngredientsSet({ ingredients, type, title, onClick }) {
             <IngredientCard
               key={ingredient._id}
               ingredient={ingredient}
-              onClick={onClick}
             />
           ))}
       </ul>
     </section>
   )
 }
+)
 
 IngredientsSet.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientType).isRequired,
+  type: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
 }
