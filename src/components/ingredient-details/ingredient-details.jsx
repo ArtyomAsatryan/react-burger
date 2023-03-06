@@ -1,5 +1,4 @@
 import styles from './ingredient-details.module.css';
-import { ingredientType } from '../../utils/prop-types.jsx';
 import { useSelector } from 'react-redux';
 
 export function IngredientDetails() {
@@ -36,7 +35,3 @@ export function IngredientDetails() {
   )
 }
 
-
-IngredientDetails.propTypes = {
-  ingredient: ingredientType.isRequired,
-}

@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import styles from './burger-ingredients.module.css'
+import styles from './burger-ingredients.module.css';
+import { IngredientsSet } from '../ingredient-set/ingredient-set';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
-import { IngredientsSet } from '../ingredient-set/ingredient-set.jsx';
 
-export function BurgerIngredientsFunction() {
+function BurgerIngredientsFunction() {
 
   const containerRef = useRef();
   const bunRef = useRef();
@@ -13,7 +13,6 @@ export function BurgerIngredientsFunction() {
   const [current, setCurrent] = useState('bun');
 
   const scrollToRef = (ref) => {
-
     if (ref === 'bun') {
       bunRef.current.scrollIntoView({ behavior: "smooth" })
     }

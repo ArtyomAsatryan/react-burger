@@ -1,4 +1,3 @@
-import React from 'react'
 import styles from './burger-elements.module.css';
 import PropTypes from 'prop-types';
 import { useRef } from "react";
