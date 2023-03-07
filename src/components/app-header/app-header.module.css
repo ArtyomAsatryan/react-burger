@@ -1,0 +1,59 @@
+.header {
+  display: flex;
+  background-color: #1C1C21;
+  max-width: 1920px;
+  height: 88px;
+  justify-content: center;
+}
+
+.headerNavigation {
+  max-width: 1280px;
+  white-space: nowrap;
+}
+
+.navigationList {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+}
+
+.twoBlocks {
+  display: flex;
+}
+
+.constructor {
+  display: flex;
+  padding: 16px 20px;
+  margin-right: 8px;
+}
+
+.constructorText {
+  text-decoration: none;
+  color: #fff;
+}
+
+.orders {
+  display: flex;
+  padding: 16px 20px;
+}
+
+.ordersText {
+  text-decoration: none;
+}
+
+.logo {
+  padding: 0 112px;
+}
+
+.account {
+  display: flex;
+  justify-content: flex-end;
+  padding: 18px 20px;
+  margin-left: 8px;
+}
+
+.accountText {
+  text-decoration: none;
+}
