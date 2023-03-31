@@ -1,0 +1,33 @@
+.header {
+  display: flex;
+  background-color: #1C1C21;
+  max-width: 1920px;
+  height: 88px;
+  justify-content: center;
+}
+
+.headerNavigation {
+  max-width: 1240px;
+  white-space: nowrap;
+  display: grid;
+  grid-template-columns: 343px 290px 343px;
+  gap: 132px;
+  align-items: center;
+}
+
+.twoBlocks {
+  display: flex;
+  gap: 49px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: end;
+  text-decoration: none;
+}
+
+.active {
+  color: #F2F2F3;
+}
