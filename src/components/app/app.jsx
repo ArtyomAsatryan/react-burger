@@ -4,12 +4,12 @@ import { AppHeader } from '../app-header/app-header';
 import { getIngredientsList } from '../../services/actions/ingredients-list';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndProvider } from 'react-dnd';
-import { Routes, Route } from 'react-router-dom';
-import { ProtectedRoute } from '../protected-route/protected-route.jsx';
+import { Route, Routes } from 'react-router-dom';
+import { ProtectedRoute } from '../protected-route/protected-route';
 import {
   Main, Registration, LoginPage,
   ForgotPassword, ResetPassword, ProfilePage,
-  PageNotFound
+  IngredientPage, PageNotFound
 } from '../../pages/index';
 
 export function App() {
@@ -24,14 +24,14 @@ export function App() {
     <DndProvider backend={HTML5Backend}>
       <AppHeader />
       <Routes>
-        <Route path="/"  component={Main} />
-        <Route path="/login"  component={LoginPage} />
-        <Route path="/register"  component={Registration} />
-        <Route path="/forgot-password" component={ForgotPassword} />
-        <Route path="/reset-password"  component={ResetPassword} />
-        <ProtectedRoute path="/profile" component={ProfilePage} />
-        <ProtectedRoute path="/profile/orders" component={ProfilePage} />
-        <Route component={PageNotFound} />
+        <Route path="/" exact={true} element={<Main/>} />
+        <Route path="/login" exact={true} element={<LoginPage/>} />
+        <Route path="/register" exact={true} element={<Registration/>} />
+        <Route path="/forgot-password" exact={true} element={<ForgotPassword/>} />
+        <Route path="/reset-password" exact={true} element={<ResetPassword/>} />
+        <Route path="/forgot-password" exact={true} element={<ProtectedRoute path="/profile" element={<ProfilePage/>} />}/>
+        <Route path="/forgot-password" exact={true} element={<ProtectedRoute path="/profile/orders" element={<ProfilePage/>} />}/>
+        <Route path="/*" element={<PageNotFound/>} />
       </Routes>
     </DndProvider>
   )

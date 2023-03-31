@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './pages.module.css';
 import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Link, redirect } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { createNewAccount } from '../services/actions/register';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -18,7 +18,7 @@ export function Registration() {
     })
 
     if (authorization) {
-        return (<redirect to={'/login'} />)
+        return (<Navigate replace to='/login'/>)
     }
 
     return (

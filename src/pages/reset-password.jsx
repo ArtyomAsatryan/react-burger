@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './pages.module.css';
 import { PasswordInput, Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Link, redirect } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { confirmNewPassword } from '../services/actions/password-reset'
 
@@ -19,7 +19,7 @@ export function ResetPassword() {
 
     if (authorization) {
         return (
-            <redirect to={'/login'} />
+            <Navigate replace to='/login'/>
         )
     }
 

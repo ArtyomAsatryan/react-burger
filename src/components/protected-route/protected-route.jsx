@@ -1,19 +1,19 @@
-import {Navigate, Route} from 'react-router-dom';
-import {useSelector} from "react-redux";
+import { Route, Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-export const ProtectedRoute = ( { component, path } ) => {
+export const ProtectedRoute = (props) => {
 
     const authorization = useSelector(state => state.getLogin.login);
 
     if (!authorization) {
 
         return (
-            <Route path={path} component={component}>
+            <Route path={props.path} exact={props.exact}>
                 <Navigate
                     to={'/login?retpath=/profile'}
                 />
             </Route>
         )
     }
-    return <Route path={path} component={component} />
+    return <Route {...props} />
 }

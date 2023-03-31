@@ -10,33 +10,38 @@ function AppHeaderFunction() {
   return (
     <header className={styles.header}>
       <nav className={styles.headerNavigation}>
-          <div className={styles.twoBlocks}>
-              <NavLink
-                to='/'
-                className={styles.link}>
-                <BurgerIcon type={pathname === '/' ? "primary" : "secondary"} />
-                <p className={pathname === '/'
-                  ? `${styles.active} text text_type_main-default`
-                  : `text text_type_main-default text_color_inactive`}
-                >
-                  Конструктор
-                </p>
-              </NavLink>
-              <a
-                href='#'
-                className={styles.link}>
-                <ListIcon type={pathname === '#' ? "primary" : "secondary"} />
-                <p className={pathname === '#'
-                  ? `${styles.active} text text_type_main-default`
-                  : `text text_type_main-default text_color_inactive`}
-                >
-                  Лента заказов
-                </p>
-              </a>
-          </div>
-          <Logo />
+        <div className={styles.twoBlocks}>
+          <NavLink
+            to='/'
+           
+            className={styles.link}>
+            <BurgerIcon type={pathname === '/' ? "primary" : "secondary"} />
+            <p className={pathname === '/'
+              ? `${styles.active} text text_type_main-default`
+              : `text text_type_main-default text_color_inactive`}
+            >
+              Конструктор
+            </p>
+          </NavLink>
+
+          <a
+            href='#'
+            className={styles.link}>
+            <ListIcon type={pathname === '#' ? "primary" : "secondary"} />
+            <p className={pathname === '#'
+              ? `${styles.active} text text_type_main-default`
+              : `text text_type_main-default text_color_inactive`}
+            >
+              Лента заказов
+            </p>
+          </a>
+        </div>
+
+        <Logo />
+
           <NavLink
             to='/profile'
+            
             className={styles.link}>
             <ProfileIcon type={pathname === '/profile' ? "primary" : "secondary"} />
             <p className={pathname === '/profile'

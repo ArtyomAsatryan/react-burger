@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './pages.module.css';
 import { EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Link, redirect } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserLogin } from '../services/actions/login';
 
@@ -21,7 +21,7 @@ export function LoginPage() {
 
     if (authorization) {
         const searchParams = new URLSearchParams(window.location.search)
-        return (<redirect to={searchParams.get('retpath') || '/'} />)
+        return (<Navigate replace to={searchParams.get('retpath') || '/'} />)
     }
 
     return (

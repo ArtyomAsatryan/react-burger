@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import styles from './pages.module.css';
 import { useDispatch } from 'react-redux';
 import { getUserInfo } from '../services/actions/user';
-import { Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { ProfileForm } from '../components/profile-form/profile-form';
 import { OrdersHistory } from '../components/orders-history/orders-history';
 import { Menu } from '../components/menu/menu';
@@ -18,8 +18,10 @@ export function ProfilePage() {
     return (
         <section className={styles.profile}>
             <Menu />
-            <Route path="/profile" exact={true} component={ProfileForm} />
-            <Route path="/profile/orders" exact={true} component={OrdersHistory} />
+            <Routes>
+                <Route path="/profile" element={ProfileForm} />
+                <Route path="/profile/orders" element={OrdersHistory} />
+            </Routes>
         </section>
     )
 }
