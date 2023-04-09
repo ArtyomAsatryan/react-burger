@@ -56,7 +56,8 @@ export const BurgerElement: FC<TBurgerElement> = ({ element, deleteElement, id, 
 
   drag(drop(ref))
 
-  return (<div className={styles.listElement} key={element.id} ref={ref}>
+  return (
+  <div className={styles.listElement} key={element.id} ref={ref}>
     <DragIcon type="primary" />
     <ConstructorElement
       handleClose={() => deleteElement(element)}
@@ -64,5 +65,6 @@ export const BurgerElement: FC<TBurgerElement> = ({ element, deleteElement, id, 
       price={element.price}
       thumbnail={element.image}
     />
-  </div>)
+  </div>
+  )
 }

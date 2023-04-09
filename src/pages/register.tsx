@@ -3,7 +3,7 @@ import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-de
 import { Link, Navigate } from 'react-router-dom';
 import { createNewAccount } from '../services/actions/register';
 import { useDispatch, useSelector } from '../services/hooks/hooks';
-import { FormEventHandler } from 'react';
+import React, { ChangeEvent, FormEventHandler } from 'react';
 import { useForm } from '../services/hooks/useForm';
 
 export const Registration = () => {
@@ -11,22 +11,22 @@ export const Registration = () => {
     const dispatch = useDispatch();
     const authorization = useSelector(state => state.registration.success);
 
-    const { values, setValues } = useForm({ name: '', email: '', password: '' });
+    const { values, handleChange } = useForm({ name: '', email: '', password: '' });
 
-    const registrationData: FormEventHandler = (event) => {
+    const registrationData: FormEventHandler<HTMLFormElement> = (event) => {
         event.preventDefault();
         dispatch(createNewAccount(values.name, values.email, values.password))
     }
+
     if (authorization) {
-        return (<Navigate replace to='/login'/>)
+        return (<Navigate replace to='/login' />)
     }
 
-    
     return (
         <form className={styles.form} onSubmit={(event) => registrationData(event)} >
             <h3 className="text text_type_main-medium mb-6">Регистрация</h3>
             <Input
-                onChange={(event) => setValues({ ...values, name: event.target.value })}
+                onChange={handleChange}
                 type={'text'}
                 placeholder={'Имя'}
                 value={values.name}
@@ -34,13 +34,13 @@ export const Registration = () => {
                 extraClass="mb-6"
             />
             <EmailInput
-                onChange={(event) => setValues({ ...values, email: event.target.value })}
+                onChange={handleChange}
                 value={values.email}
                 name={'email'}
                 extraClass="mb-6"
             />
             <PasswordInput
-                onChange={(event) => setValues({ ...values, password: event.target.value })}
+                onChange={handleChange}
                 value={values.password}
                 name={'password'}
                 extraClass="mb-6"
@@ -48,7 +48,8 @@ export const Registration = () => {
             <Button
                 type="primary"
                 htmlType="submit"
-                size="medium">
+                size="medium"
+            >
                 Зарегистрироваться
             </Button>
             <div className={`${styles.line} mt-20`}>

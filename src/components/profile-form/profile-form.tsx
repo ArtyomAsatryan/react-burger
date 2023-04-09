@@ -1,4 +1,4 @@
-import React, {FormEventHandler, useEffect, useState } from 'react';
+import React, {ChangeEvent, FormEventHandler, useEffect, useState } from 'react';
 import styles from './profile-form.module.css';
 import { patchUserInfo } from '../../services/actions/user';
 import { useDispatch, useSelector } from '../../services/hooks/hooks';
@@ -40,45 +40,47 @@ export const ProfileForm = () => {
     const render = value.name !== userName || value.email !== userEmail || value.password.length >= 6;
 
     return (
-        <form onSubmit={saveInfo}>
-            <Input
-                onChange={event => setValue({ ...value, name: event.target.value })}
-                value={value.name}
-                type={'text'}
-                placeholder={'Имя'}
-                icon={'EditIcon'}
-                extraClass="mb-6"
-            />
-            <Input
-                onChange={event => setValue({ ...value, email: event.target.value })}
-                value={value.email}
-                name={'email'}
-                placeholder={'Логин'}
-                icon={'EditIcon'}
-                extraClass="mb-6"
-            />
-            <PasswordInput
-                onChange={event => setValue({ ...value, password: event.target.value })}
-                value={value.password}
-                name={'password'}
-                icon={'EditIcon'}
-                extraClass="mb-6"
-            />
-            {render ? <div className={styles.buttons}>
-                <Button
-                    onClick={cancelChanges}
-                    type="secondary"
-                    htmlType="reset"
-                    size='medium'>
-                    Отмена
-                </Button>
-                <Button
-                    type='primary'
-                    htmlType="submit"
-                    size='medium'>
-                    Сохранить
-                </Button>
-            </div> : null}
-        </form>
+        <form className={styles.form} onSubmit={saveInfo}>
+        <Input
+            onChange={(event: ChangeEvent<HTMLInputElement>) => setValue({ ...value, name: event.target.value })}
+            value={value.name}
+            type={'text'}
+            placeholder={'Имя'}
+            icon={'EditIcon'}
+            extraClass="mb-6"
+        />
+        <Input
+            onChange={(event: ChangeEvent<HTMLInputElement>) => setValue({ ...value, email: event.target.value })}
+            value={value.email}
+            name={'email'}
+            placeholder={'Логин'}
+            icon={'EditIcon'}
+            extraClass="mb-6"
+        />
+        <PasswordInput
+            onChange={(event: ChangeEvent<HTMLInputElement>) => setValue({ ...value, password: event.target.value })}
+            value={value.password}
+            name={'password'}
+            icon={'EditIcon'}
+            extraClass="mb-6"
+        />
+        {render ? <div className={styles.buttons}>
+            <Button
+                onClick={cancelChanges}
+                type="secondary"
+                htmlType="reset"
+                size='medium'
+            >
+                Отмена
+            </Button>
+            <Button
+                type='primary'
+                htmlType="submit"
+                size='medium'
+            >
+                Сохранить
+            </Button>
+        </div> : null}
+    </form>
     )
 }

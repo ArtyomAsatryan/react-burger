@@ -3,7 +3,7 @@ import { useDrop } from 'react-dnd';
 import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from '../../services/hooks/hooks';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
-import { setBun, addIngredient, deleteIngredient, moveIngredient } from '../../services/actions/ingredients-constructor';
+import { setBun, addIngredient, deleteIngredient } from '../../services/actions/ingredients-constructor';
 import { BurgerElement } from '../burger-elements/burger-elements';
 import { TIngredientCard, TIngredientType } from '../../services/types/types';
 
