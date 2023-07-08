@@ -5,7 +5,7 @@ import { BurgerIngredients } from '../components/burger-ingredients/burger-ingre
 import { BurgerConstructor } from '../components/burger-constructor/burger-constructor';
 import { PriceCount } from '../components/price-count/price-count';
 import { useNavigate } from 'react-router-dom';
-import { getOrderNumber } from '../services/actions/order-details';
+import { getOrderNumber, deleteOrderSuccess } from '../services/actions/order-details';
 import { useDispatch } from '../services/hooks/hooks';
 import { Modal } from '../components/modal/modal';
 import { OrderDetails } from '../components/order-details/order-details';
@@ -17,7 +17,7 @@ export const Main = () => {
   const navigate = useNavigate();
   const authorization = useSelector(state => state.getLogin.login);
 
-   const main = useSelector(state => state.constructorList.constructorList);
+  const main = useSelector(state => state.constructorList.constructorList);
   const buns = useSelector(state => state.constructorList.buns);
   const mainList = (main.map((element) => element._id))
   const bunsList = (buns.map((element) => element._id))
@@ -36,6 +36,7 @@ export const Main = () => {
 
   const closeOrderModal = useCallback(() => {
     setOrderOpenModal(false)
+    dispatch(deleteOrderSuccess())
     dispatch(clearConstructor())
   }, [])
 
@@ -45,9 +46,7 @@ export const Main = () => {
         <BurgerIngredients />
         <div className={styles.twoBlocks}>
           <BurgerConstructor />
-          {buns.length > 0 ?
-            <PriceCount onClick={handleOrderOpenModal} />
-            : null}
+          <PriceCount onClick={handleOrderOpenModal} />
         </div>
       </main>
 

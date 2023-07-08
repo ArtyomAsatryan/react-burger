@@ -9,7 +9,7 @@ import { ProtectedRoute } from '../protected-route/protected-route';
 import {
   Main, Registration, LoginPage,
   ForgotPassword, ResetPassword, ProfilePage,
-  IngredientPage, PageNotFound, FeedId, OrderId, FeedPage
+  IngredientPage, PageNotFound, FeedId, OrderId, FeedPage, OrderPage
 } from '../../pages/index';
 import { TLocation } from '../../services/types/types';
 import { Modal } from '../../components/modal/modal';
@@ -24,11 +24,11 @@ export const App = () => {
   const navigate = useNavigate();
   const background = location.state && location.state.background;
 
-/*
-  const onModalClose = () => {
-    navigate(-1);
-  };
-*/
+  /*
+    const onModalClose = () => {
+      navigate(-1);
+    };
+  */
 
 
   useEffect(() => {
@@ -40,59 +40,61 @@ export const App = () => {
     navigate('/')
   }, [])
 
-  const onModalClose = useCallback(() => {
+  const closeModal = useCallback(() => {
     navigate(-1)
   }, [])
+
+
+
   
-
-
-
-  return (
-    <>
-      <DndProvider backend={HTML5Backend}>
-        <AppHeader />
-        <Routes location={background || location}>
-
-
-          <Route path="/" element={<Main />} />
-          <Route path="/feed" element={<FeedPage/>}/>
-        <Route path='/feed/:id' element={<FeedId/>}/>
-          <Route path="/register" element={<ProtectedRoute element={<Registration />} anonymous={true} />} />
-          <Route path="/login" element={<ProtectedRoute element={<LoginPage />} anonymous={true} />} />
-          <Route path="/forgot-password" element={<ProtectedRoute element={<ForgotPassword />} anonymous={true} />} />
-          <Route path="/reset-password" element={<ProtectedRoute element={<ResetPassword />} anonymous={true} />} />
-          <Route path="/profile/orders/:id"
-               element={<ProtectedRoute element={<OrderId/>} anonymous={false}/>}/>
-          <Route path="/profile/*" element={<ProtectedRoute element={<ProfilePage />} anonymous={false} />} />
-          <Route path="/profile/orders" element={<ProtectedRoute element={<ProfilePage />} anonymous={true} />} />
-          <Route path="/ingredients/:id" element={<IngredientPage />} />
-          <Route path="/*" element={<PageNotFound />} />
-        </Routes>
-        {background && (
-          <Routes location={location}>
-            <Route path="/ingredients/:id" element={
-              <Modal onClose={closeIngredientsModal}>
-                <IngredientPage />
+    return (
+      
+        <DndProvider backend={HTML5Backend}>
+          <AppHeader />
+          <Routes location={background || location}>
+            <Route path="/" element={<Main />} />
+            <Route path="/register" element={<ProtectedRoute element={<Registration />} anonymous={true} />} />
+            <Route path="/login" element={<ProtectedRoute element={<LoginPage />} anonymous={true} />} />
+            <Route path="/forgot-password" element={<ProtectedRoute element={<ForgotPassword />} anonymous={true} />} />
+            <Route path="/reset-password" element={<ProtectedRoute element={<ResetPassword />} anonymous={true} />} />
+            <Route path="/profile/orders/:id"
+                 element={<ProtectedRoute element={<OrderId/>} anonymous={false}/>}/>
+            <Route path="/profile" element={<ProtectedRoute element={<ProfilePage />} anonymous={false} />} />
+            <Route path="/profile/orders" element={<ProtectedRoute element={<OrderPage />} anonymous={false} />} />
+            <Route path="/feed" element={<FeedPage/>}/>
+            <Route path='/feed/:id' element={<FeedId/>}/>
+            <Route path="/ingredients/:id" element={<IngredientPage />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+          {background && (
+            <>
+            <Routes location={location}>
+              <Route path="/ingredients/:id" element={
+                <Modal onClose={closeIngredientsModal} title='Детали ингредиента'>
+                  <IngredientDetails />
+                </Modal>}
+              >
+              </Route>
+  
+            <Route path="/feed/:id" element={
+              <Modal onClose={closeModal}>
+                <OrderInfo/>
               </Modal>}
             >
             </Route>
-
-          <Route path="/feed/:id" element={
-            <Modal onClose={onModalClose}>
-              <OrderInfo/>
-            </Modal>}
-          >
-          </Route>
-          <Route path="/profile/orders/:id" element={
-            <Modal onClose={onModalClose}>
-              <ProtectedRoute element={<OrderInfoUser/>} anonymous={false}/>
-            </Modal>}
-          >
-          </Route>
-
-          </Routes>
-        )}
-      </DndProvider>
-    </>
-  )
-}
+            
+            <Route path="/profile/orders/:id" element={
+              <Modal onClose={closeModal}>
+                <OrderInfoUser/>
+              </Modal>}
+            >
+            </Route>
+  
+            </Routes>
+            </>
+          )}
+        </DndProvider>
+      
+    )
+  }
+  

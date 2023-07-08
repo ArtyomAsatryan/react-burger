@@ -9,6 +9,7 @@ import { PageNotFound } from './not-found';
 import { FeedPage } from './feed';
 import { FeedId } from './feed-id';
 import { OrderId } from './order-id';
+import {OrderPage} from './order'
 
 
-export { Main, Registration, LoginPage, ForgotPassword, ResetPassword, ProfilePage, IngredientPage, PageNotFound, FeedPage, FeedId, OrderId }
+export { Main, Registration, LoginPage, ForgotPassword, ResetPassword, ProfilePage, IngredientPage, PageNotFound, FeedPage, FeedId, OrderId, OrderPage }

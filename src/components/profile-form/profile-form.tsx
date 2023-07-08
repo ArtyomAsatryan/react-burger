@@ -74,6 +74,7 @@ export const ProfileForm = () => {
                 Отмена
             </Button>
             <Button
+            
                 type='primary'
                 htmlType="submit"
                 size='medium'

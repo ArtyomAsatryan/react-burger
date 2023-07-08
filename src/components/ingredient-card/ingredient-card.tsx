@@ -3,7 +3,7 @@ import { useDrag } from 'react-dnd';
 import React, { FC, MouseEvent, useMemo } from 'react';
 import { useSelector, useDispatch } from '../../services/hooks/hooks';
 import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
-import { setIgredientDetails } from '../../services/actions/ingredients-details';
+import { setIngredientDetails } from '../../services/actions/ingredients-details';
 import { TIngredientCard } from '../../services/types/types';
 import { Link, useLocation } from 'react-router-dom';
 
@@ -30,16 +30,16 @@ export const IngredientCard: FC<TIngredientCard> = ({ ingredient }) => {
 
   const handleIngredientClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    dispatch(setIgredientDetails(ingredient))
+    dispatch(setIngredientDetails(ingredient))
   }
 
   return (
     <>
       <button className={styles.cardButton} onClick={handleIngredientClick} ref={dragIngredient}>
-        <Link to={{
-          pathname: `/ingredients/${ingredient._id}`,
-          
-        }}>
+        <Link to={
+          `/ingredients/${ingredient._id}`}
+          state = {{background: location}}
+        >
           <img src={ingredient.image} alt={ingredient.name} />
         </Link>
         {count > 0 ? <Counter count={count} size="small" /> : null}

@@ -3,7 +3,7 @@ import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-de
 import { Link, Navigate } from 'react-router-dom';
 import { createNewAccount } from '../services/actions/register';
 import { useDispatch, useSelector } from '../services/hooks/hooks';
-import React, { ChangeEvent, FormEventHandler } from 'react';
+import React, { FormEventHandler } from 'react';
 import { useForm } from '../services/hooks/useForm';
 
 export const Registration = () => {

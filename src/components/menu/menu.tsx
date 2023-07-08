@@ -14,19 +14,23 @@ export const Menu = () => {
 
     const { pathname } = useLocation();
 
+    const isProfile = pathname === "/profile" ? `${styles.active}` : "";
+    const isisProfileOrders = pathname === "/profile/orders" ? `${styles.active}` : "";
+
     return (
         <nav className={styles.menu}>
             <NavLink
                 to='/profile'
 
-                className={`${styles.profileMenu} text text_type_main-medium text_color_inactive`}
+                className={`${styles.profileMenu} ${isProfile} text text_type_main-medium text_color_inactive`}
+                
                 >
                 Профиль
             </NavLink>
             <NavLink
                 to='/profile/orders'
 
-                className={`${styles.profileMenu} text text_type_main-medium text_color_inactive`}
+                className={`${styles.profileMenu} ${isisProfileOrders} text text_type_main-medium text_color_inactive`}
                 >
                 История заказов
             </NavLink>

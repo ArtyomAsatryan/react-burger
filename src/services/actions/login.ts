@@ -1,7 +1,7 @@
 import { apiBurger } from '../../utils/api';
 import { setCookie } from '../../utils/cookie';
 import { LOGIN_SUCCESS } from '../constants/constants';
-import { IGetLoginSuccess } from './interfaces';
+import { IGetLoginSuccess } from '../actions/interfaces';
 import { AppThunk } from '../types/types';
 
 export const getLoginSuccess = (payload: boolean): IGetLoginSuccess => ({

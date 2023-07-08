@@ -26,10 +26,10 @@ export const ProfilePage = () => {
     return (
         <section className={styles.profile}>
             <Menu />
-            <Routes>
-                <Route path="/profile" element={<ProfileForm/>} />
-                <Route path="/profile/orders" element={<OrdersHistoryUser/>} />
-                </Routes>
+            
+            <ProfileForm/>
+                
+                
         </section>
     )
 }

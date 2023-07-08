@@ -22,24 +22,24 @@ export const OrderCard: FC<TOrderProps> = ({ order }) => {
         }).filter(inNotUndefined);
     const orderIngredientsForImage = ingredients.filter((ingredient) => order.ingredients.includes(ingredient._id))
     const totalOrderPrice = orderIngredientsForTotal.reduce(
-        (acc, ingredient) => acc + ingredient.price,
-        0
-    );
+        (acc, ingredient) => acc + ingredient.price, 0);
+    const count = orderIngredientsForImage.length - 6;
 
     const openOrderDetails = () => {
         if (location.pathname === '/feed') {
             const url = `/feed/${order._id}`;
-            navigate({
-                pathname: url,
-                
-            })
+            navigate(
+                { pathname: url },
+                { state: { background: location } }
+            )
         }
         if (location.pathname === '/profile/orders') {
             const url = `/profile/orders/${order._id}`;
             navigate({
-                pathname: url,
-                
-            })
+                pathname: url
+            },
+                { state: { background: location } }
+            )
         }
     }
 
@@ -53,6 +53,7 @@ export const OrderCard: FC<TOrderProps> = ({ order }) => {
         }
         return false;
     }
+
     const date = conversionDate(order.createdAt);
 
     return (
@@ -62,15 +63,25 @@ export const OrderCard: FC<TOrderProps> = ({ order }) => {
                 <p className='text text_type_main-default text_color_inactive'>{date}</p>
             </div>
             <h3 className={`${styles.text} text text_type_main-medium mt-6`}>{order.name}</h3>
-            <p className='text text_type_main-default mt-2' style={order?.status === 'done' ? { color: '#00CCCC' } : { color: '#FFFFFF' }}>{getStatus(order?.status)}</p>
+            <p className='text text_type_main-default mt-2' style={order?.status === 'done'
+                ? { color: '#00CCCC' }
+                : { color: '#FFFFFF' }}
+            >
+                {getStatus(order?.status)}
+            </p>
             <p className={`${styles.text} text text_type_main-medium mt-6`}></p>
             <div className={styles.ingredients}>
                 <ul className={styles.list}>
-                    {orderIngredientsForImage.map(image =>
-                        <li className={styles.ingredientFrame} key={image._id}>
-                            <img className={styles.ingredientImage} src={image.image_mobile} />
-                        </li>
-                    )}
+                    {orderIngredientsForImage
+                        .slice(0, 6)
+                        .map((image, index) =>
+                            <li className={styles.ingredientFrame} key={image._id} style={{ zIndex: 5 - index }} >
+                                <img className={styles.ingredientImage} src={image.image_mobile} />
+                            </li>
+                        )}
+                    {orderIngredientsForImage.length > 6 ? (<div className={styles.overlay}>
+                        <span className='text text_type_main-default'>{`+${count}`}</span>
+                    </div>) : null}
                 </ul>
                 <div className={styles.price}>
                     <p className='text text_type_digits-default mr-2'>{totalOrderPrice}</p>

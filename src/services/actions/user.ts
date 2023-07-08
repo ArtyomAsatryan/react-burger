@@ -4,7 +4,7 @@ import { TUser } from "../types/types";
 import { IGetUserSuccess, IPatchUserSuccess } from '../actions/interfaces';
 import { AppThunk } from "../types/types";
 
-export const userSuccess = (payload: TUser): IGetUserSuccess => ({
+export const getUserSuccess = (payload: TUser): IGetUserSuccess => ({
     type: GET_USER_SUCCESS,
     payload
 })
@@ -18,7 +18,7 @@ export const getUserInfo: AppThunk = () => {
     return (dispatch) =>
         apiBurger.getUserData()
             .then((data) => {
-                dispatch(userSuccess(data));
+                dispatch(getUserSuccess(data));
             })
             .catch((error) => {
                 console.log(error)
@@ -29,7 +29,7 @@ export const patchUserInfo: AppThunk = (name: string, email: string, password: s
     return (dispatch) =>
         apiBurger.patchUserData(name, email, password)
             .then((data) => {
-                dispatch(userSuccess(data));
+                dispatch(patchUserSuccess(data));
             })
             .catch((error) => {
                 console.log(error)

@@ -3,7 +3,7 @@ import { EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer
 import { Link, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from '../services/hooks/hooks';
 import { getUserLogin } from '../services/actions/login';
-import React, { ChangeEvent, FormEventHandler } from 'react';
+import React, { FormEventHandler } from 'react';
 import { useForm } from '../services/hooks/useForm';
 
 export const LoginPage = () => {
@@ -17,11 +17,14 @@ export const LoginPage = () => {
         event.preventDefault();
         dispatch(getUserLogin(values.email, values.password))
     }
+   
     
     if (authorization) {
         const searchParams = new URLSearchParams(window.location.search)
-        return (<Navigate replace to={searchParams.get('retpath') || '/'} />)
+        return (<Navigate to={searchParams.get('retpath') || '/'} />)
     }
+
+    
 
     return (
         <form className={styles.form} onSubmit={handleLogin}>

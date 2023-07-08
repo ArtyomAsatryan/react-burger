@@ -3,7 +3,7 @@ import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-component
 import { Link, Navigate } from 'react-router-dom';
 import { createNewPassword } from '../services/actions/password-forgot';
 import { useDispatch, useSelector } from '../services/hooks/hooks';
-import React, { ChangeEvent, FormEventHandler } from 'react';
+import React, { FormEventHandler } from 'react';
 import { useForm } from '../services/hooks/useForm';
 
 export const ForgotPassword = () => {
@@ -13,7 +13,7 @@ export const ForgotPassword = () => {
 
     const { values, handleChange } = useForm({ email: '' });
 
-    const emailData: FormEventHandler = (event) => {
+    const emailData: FormEventHandler<HTMLFormElement> = (event) => {
         event.preventDefault();
         dispatch(createNewPassword(values.email))
     }

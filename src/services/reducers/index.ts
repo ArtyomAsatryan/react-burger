@@ -1,8 +1,8 @@
-import { ingredientDetailsReducer } from "./ingredients-details";
-import { constructorListReducer } from "./ingredients-constructor";
-import { ingredientsListReducer } from "./ingredients-list";
-import { orderDetailsReducer } from "./order-details";
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux';
+import { ingredientDetailsReducer } from './ingredients-details';
+import { constructorListReducer } from './ingredients-constructor';
+import { ingredientsListReducer } from './ingredients-list';
+import { orderDetailsReducer } from './order-details';
 import { passwordForgotReducer } from './password-forgot';
 import { passwordResetReducer } from './password-reset';
 import { registrationReducer } from './register';
@@ -11,15 +11,15 @@ import { getUserInfoReducer } from './user';
 import { wsReducer, wsReducerUser } from './wsReducers';
 
 export const rootReducer = combineReducers({
-    ingredientDetails: ingredientDetailsReducer,
-    constructorList: constructorListReducer,
-    ingredientsList: ingredientsListReducer,
-    orderDetails: orderDetailsReducer,
-    passwordForgot: passwordForgotReducer,
-    passwordReset: passwordResetReducer,
-    registration: registrationReducer,
-    getLogin: getLoginReducer,
-    userInfo: getUserInfoReducer,
-    webSocket: wsReducer,
-    webSocketUser: wsReducerUser
-})
+  ingredientDetails: ingredientDetailsReducer,
+  constructorList: constructorListReducer,
+  ingredientsList: ingredientsListReducer,
+  orderDetails: orderDetailsReducer,
+  passwordForgot: passwordForgotReducer,
+  passwordReset: passwordResetReducer,
+  registration: registrationReducer,
+  getLogin: getLoginReducer,
+  userInfo: getUserInfoReducer,
+  webSocket: wsReducer,
+  webSocketUser: wsReducerUser
+});
