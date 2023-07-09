@@ -1,6 +1,6 @@
 describe('service is available', function() {
-   it('should be available on localhost:3001', function() {
-     cy.visit('http://localhost:3001');
+   it('should be available on localhost:3000', function() {
+     cy.visit('');
    });
  }); 
 
@@ -39,7 +39,7 @@ describe('constructor drag-and-drop works', () => {
   it('should handle drag and drop within constructor', () => {
     const dataTransfer = new DataTransfer();
     cy.visit('/');
-    cy.get('section[class^="burger-constructor_total__Ppsew"]').as('dropTarget');
+    cy.get('section[class^="burger-constructor_total"]').as('dropTarget');
     cy.get("div").contains("Соус Spicy-X").trigger('dragstart', {dataTransfer});
     cy.get('@dropTarget').trigger('drop', {dataTransfer});
     cy.get("div").contains("Мясо бессмертных моллюсков Protostomia").trigger('dragstart', {dataTransfer});
@@ -53,7 +53,7 @@ describe('opening and closing ingredient details popup', () => {
   it('should handle opening and closing ingredient details popup', () => {
     cy.visit('/');
     cy.get('div').contains('Говяжий метеорит (отбивная)').click();
-    cy.get("div[class^='modal_modal__kT8ZM']").as("modalPopup");
+    cy.get("div[class^='modal_modal']").as("modalPopup");
     cy.get("@modalPopup").should('exist');
     cy.get("@modalPopup")
       .should('contain', "Говяжий метеорит (отбивная)")

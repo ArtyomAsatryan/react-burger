@@ -13,8 +13,6 @@ export const payload = {
     },
 }
 
-
-
 export const start = 0
 export const end = 1
 

@@ -3,7 +3,7 @@ import {
     initialState as state
 } from './user';
 import { getUserSuccess, patchUserSuccess } from '../actions/user';
-import { payload, payload2, user } from '../../utils/test-constants';
+import { payload,  user } from '../../utils/test-constants';
 
 describe('profile reducer test', () => {
 
@@ -16,11 +16,11 @@ describe('profile reducer test', () => {
     })
 
     it('should handle update user info', () => {
-        expect(reducer({ ...state, user: user }, patchUserSuccess(payload2)))
+        expect(reducer({ ...state, user: user }, patchUserSuccess(payload)))
             .toEqual({
                 ...state,
                 success: true,
-                user: payload2.user
+                user: payload.user
             })
     })
 })
