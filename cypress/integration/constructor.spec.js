@@ -29,7 +29,7 @@ describe('constructor drag-and-drop works', () => {
     const dataTransfer = new DataTransfer();
     cy.visit('/');
     cy.get("div").contains("Соус Spicy-X").trigger('dragstart', {dataTransfer});
-    cy.get('section[class^="burger-constructor_total__Ppsew"]').as('dropTarget');
+    cy.get('section[class^="burger-constructor_total"]').as('dropTarget');
     cy.get('@dropTarget').trigger('drop', {dataTransfer});
     cy.get('@dropTarget').should('contain', 'Соус Spicy-X');
     cy.get('span[class^="constructor-element__action"]').click();
