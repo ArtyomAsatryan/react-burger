@@ -36,8 +36,11 @@ $ npm run start
 3. сборка в продакшн
 $ npm run build
 
-4. запуск сервера localhost:3000 из папки build
+**Ссылка на сайт**  
+* [Stellar Burgers](https://artyomasatryan.github.io/react-burger/)
+
+5. запуск сервера localhost:3000 из папки build
 $ npm run build
 
-5. запуск тестирования приложения
+6. запуск тестирования приложения
 $ npm run test
